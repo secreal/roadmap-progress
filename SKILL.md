@@ -41,7 +41,8 @@ A short one-paragraph summary of the current objective and overall progress.
 
 [Context A][Context B][Context C]
 |-[001][DONE] Description of completed work
-|-[002][IN PROGRESS] Description of active work
+|-[002][IN PROGRESS] Implement the active workflow and verify every milestone against the current workspace requirements
+                     before recording the final state in ROADMAP.txt.
 |-[003][NOT STARTED] Description of planned work
 ```
 
@@ -56,6 +57,11 @@ Apply these rules:
 - Use three-digit, zero-padded, sequential IDs starting at `001`.
 - Use only the exact statuses `DONE`, `IN PROGRESS`, and `NOT STARTED`.
 - Keep descriptions concise, specific, and outcome-oriented.
+- Limit each physical task-description line to 100 characters, excluding the task prefix or continuation indentation.
+- Wrap long descriptions at a word boundary before they exceed 100 characters. Do not rely on editor word wrap.
+- Indent every continuation line with exactly enough spaces to align its first character with the first character of the description above.
+- Calculate continuation indentation from the full prefix `|-[NNN][STATUS] ` because different statuses produce different prefix widths.
+- Do not repeat `|-`, the task ID, or the status on continuation lines.
 - End the file with a newline.
 - Do not use box-drawing characters, tables, columns, or standalone percentage rows.
 

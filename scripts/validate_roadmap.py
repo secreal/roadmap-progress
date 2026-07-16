@@ -9,7 +9,10 @@ from pathlib import Path
 
 
 CONTEXT_RE = re.compile(r"(?:\[[^\]\r\n]+\])+")
-TASK_RE = re.compile(r"\|-\[(\d{3})\]\[(DONE|IN PROGRESS|NOT STARTED)\] .+")
+TASK_RE = re.compile(
+    r"(?P<prefix>\|-\[(?P<id>\d{3})\]\[(?P<status>DONE|IN PROGRESS|NOT STARTED)\] )"
+    r"(?P<description>.+)"
+)
 BOX_DRAWING = set("━─│┏┓┗┛┣┫┳┻╋")
 
 
@@ -55,9 +58,34 @@ def validate(path: Path) -> list[str]:
         match = TASK_RE.fullmatch(lines[index])
         if match is None:
             errors.append(f"Line {index + 1} does not match |-[NNN][STATUS] description.")
-        else:
-            ids.append(int(match.group(1)))
+            index += 1
+            continue
+
+        ids.append(int(match.group("id")))
+        prefix_width = len(match.group("prefix"))
+        description = match.group("description")
+        if len(description) > 100:
+            errors.append(f"Line {index + 1} task description exceeds 100 characters.")
         index += 1
+
+        expected_indent = " " * prefix_width
+        while index < len(lines) and lines[index].startswith(" "):
+            continuation = lines[index]
+            if not continuation.startswith(expected_indent):
+                errors.append(
+                    f"Line {index + 1} continuation must use exactly {prefix_width} leading spaces."
+                )
+            elif len(continuation) == prefix_width or continuation[prefix_width].isspace():
+                errors.append(
+                    f"Line {index + 1} continuation must align exactly with the description above."
+                )
+            else:
+                continuation_text = continuation[prefix_width:]
+                if len(continuation_text) > 100:
+                    errors.append(
+                        f"Line {index + 1} continuation text exceeds 100 characters."
+                    )
+            index += 1
 
     if not ids:
         errors.append("At least one task line is required.")

@@ -3,5 +3,6 @@ Replace this line with one short paragraph summarizing the current objective and
 
 [Context A][Context B][Context C]
 |-[001][DONE] Describe completed work
-|-[002][IN PROGRESS] Describe active work
+|-[002][IN PROGRESS] Implement the active workflow and verify every milestone against the current workspace requirements
+                     before recording the final state in ROADMAP.txt.
 |-[003][NOT STARTED] Describe planned work

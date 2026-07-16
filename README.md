@@ -31,6 +31,9 @@ A short one-paragraph summary of the current objective and overall progress.
 
 [Context A][Context B][Context C]
 |-[001][DONE] Description of completed work
-|-[002][IN PROGRESS] Description of active work
+|-[002][IN PROGRESS] Implement the active workflow and verify every milestone against the current workspace requirements
+                     before recording the final state in ROADMAP.txt.
 |-[003][NOT STARTED] Description of planned work
 ```
+
+Task descriptions are physically wrapped at no more than 100 characters. Continuation lines are indented so their text aligns with the description on the first line; no editor word wrap is required.
