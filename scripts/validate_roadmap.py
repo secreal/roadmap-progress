@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 CONTEXT_RE = re.compile(r"(?:\[[^\]\r\n]+\])+")
-TASK_RE = re.compile(r"\|-\[(\d{3})\]\[(SELESAI|PROGRESS|BELUM)\] .+")
+TASK_RE = re.compile(r"\|-\[(\d{3})\]\[(DONE|IN PROGRESS|NOT STARTED)\] .+")
 BOX_DRAWING = set("━─│┏┓┗┛┣┫┳┻╋")
 
 

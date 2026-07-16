@@ -1,6 +1,6 @@
 # Roadmap Progress
 
-An AI agent skill that continuously maintains `ROADMAP.txt` at the root of the current workspace. It records a short progress summary, important notes, context tags, and numbered work items using `SELESAI`, `PROGRESS`, and `BELUM` statuses.
+An AI agent skill that continuously maintains an English-language `ROADMAP.txt` at the root of the current workspace. It records a short progress summary, important notes, context tags, and numbered work items using `DONE`, `IN PROGRESS`, and `NOT STARTED` statuses.
 
 ## Install
 
@@ -30,7 +30,7 @@ A short one-paragraph summary of the current objective and overall progress.
 *Another important note when relevant.
 
 [Context A][Context B][Context C]
-|-[001][SELESAI] Description of completed work
-|-[002][PROGRESS] Description of active work
-|-[003][BELUM] Description of planned work
+|-[001][DONE] Description of completed work
+|-[002][IN PROGRESS] Description of active work
+|-[003][NOT STARTED] Description of planned work
 ```

@@ -1,6 +1,6 @@
 ---
 name: roadmap-progress
-description: Create and continuously maintain ROADMAP.txt at the current workspace root as an AI work ledger with a short summary, important notes, context tags, stable numbered tasks, and SELESAI/PROGRESS/BELUM statuses. Use when the user asks to create, show, track, resume, or update a roadmap, progress list, implementation status, work plan, or a record of what the AI has done and will do.
+description: Create and continuously maintain ROADMAP.txt at the current workspace root as an English-language AI work ledger with a short summary, important notes, context tags, stable numbered tasks, and DONE/IN PROGRESS/NOT STARTED statuses. Use when the user asks to create, show, track, resume, or update a roadmap, progress list, implementation status, work plan, or a record of what the AI has done and will do.
 ---
 
 # Roadmap Progress
@@ -13,6 +13,7 @@ Maintain `ROADMAP.txt` as the durable, current record of work performed by the A
 - Do not substitute a chat response, terminal table, Markdown table, progress dashboard, or percentage summary for the file.
 - Do not add a `Roadmap Progress` heading or any other heading to `ROADMAP.txt`.
 - Follow the literal line syntax in this skill. Do not redesign or prettify it.
+- Write the summary, notes, context tags, task descriptions, and statuses in English.
 - If the file was not successfully written and validated, state that the operation failed instead of claiming success.
 
 ## Workflow
@@ -39,9 +40,9 @@ A short one-paragraph summary of the current objective and overall progress.
 *Another important note when relevant.
 
 [Context A][Context B][Context C]
-|-[001][SELESAI] Description of completed work
-|-[002][PROGRESS] Description of active work
-|-[003][BELUM] Description of planned work
+|-[001][DONE] Description of completed work
+|-[002][IN PROGRESS] Description of active work
+|-[003][NOT STARTED] Description of planned work
 ```
 
 Apply these rules:
@@ -53,18 +54,18 @@ Apply these rules:
 - Write context tags as adjacent square-bracketed labels: `[Context A][Context B]`.
 - Write each task as `|-[NNN][STATUS] description`.
 - Use three-digit, zero-padded, sequential IDs starting at `001`.
-- Use only the exact statuses `SELESAI`, `PROGRESS`, and `BELUM`.
+- Use only the exact statuses `DONE`, `IN PROGRESS`, and `NOT STARTED`.
 - Keep descriptions concise, specific, and outcome-oriented.
 - End the file with a newline.
 - Do not use box-drawing characters, tables, columns, or standalone percentage rows.
 
 ## Status Rules
 
-- `SELESAI`: Work is complete and supported by appropriate verification or direct evidence.
-- `PROGRESS`: Work has started and remains active or partially complete.
-- `BELUM`: Work is planned, required, or known but has not started.
+- `DONE`: Work is complete and supported by appropriate verification or direct evidence.
+- `IN PROGRESS`: Work has started and remains active or partially complete.
+- `NOT STARTED`: Work is planned, required, or known but has not started.
 
-Do not mark work `SELESAI` merely because code or text was written. Include verification when it is relevant to completion.
+Do not mark work `DONE` merely because code or text was written. Include verification when it is relevant to completion.
 
 ## Update Rules
 
@@ -77,7 +78,7 @@ Do not mark work `SELESAI` merely because code or text was written. Include veri
 - Update the context tags when the work areas change, but keep task IDs stable.
 - Record only meaningful AI work. Omit routine shell reads, tool mechanics, and conversational filler.
 - Reflect user-authored work only when it materially affects the AI's roadmap, and identify it accurately.
-- If blocked, keep the item as `PROGRESS` or `BELUM` as appropriate and explain the blocker in an important note.
+- If blocked, keep the item as `IN PROGRESS` or `NOT STARTED` as appropriate and explain the blocker in an important note.
 
 ## Final Check
 
