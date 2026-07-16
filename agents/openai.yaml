@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roadmap Progress"
+  short_description: "Keep workspace ROADMAP.txt progress current"
+  default_prompt: "Use $roadmap-progress to record and update the current workspace roadmap."
