@@ -1,0 +1,7 @@
+Replace this line with one short paragraph summarizing the current objective and overall progress.
+*Replace this line with an important note, constraint, risk, decision, or verification detail.
+
+[Context A][Context B][Context C]
+|-[001][SELESAI] Describe completed work
+|-[002][PROGRESS] Describe active work
+|-[003][BELUM] Describe planned work

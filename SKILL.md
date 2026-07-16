@@ -7,6 +7,14 @@ description: Create and continuously maintain ROADMAP.txt at the current workspa
 
 Maintain `ROADMAP.txt` as the durable, current record of work performed by the AI.
 
+## Non-Negotiable Contract
+
+- Use a filesystem editing tool to create or update `<workspace-root>/ROADMAP.txt` before presenting any roadmap result.
+- Do not substitute a chat response, terminal table, Markdown table, progress dashboard, or percentage summary for the file.
+- Do not add a `Roadmap Progress` heading or any other heading to `ROADMAP.txt`.
+- Follow the literal line syntax in this skill. Do not redesign or prettify it.
+- If the file was not successfully written and validated, state that the operation failed instead of claiming success.
+
 ## Workflow
 
 1. Determine the workspace root:
@@ -14,9 +22,10 @@ Maintain `ROADMAP.txt` as the durable, current record of work performed by the A
    - Otherwise use the current working directory.
 2. Read `<workspace-root>/ROADMAP.txt` when it exists.
 3. Inspect the current request, relevant files, repository state, and available verification evidence before assigning statuses.
-4. Create or update `ROADMAP.txt` immediately when the skill starts.
+4. Create or update `ROADMAP.txt` immediately when the skill starts. Use `<skill-directory>/assets/ROADMAP.template.txt` as the structural template when creating a new file. Resolve `<skill-directory>` as the directory containing this `SKILL.md`.
 5. Update it again after every material milestone or change in status.
-6. Update it once more before the final response so it reflects the actual final state.
+6. Run `python <skill-directory>/scripts/validate_roadmap.py <workspace-root>/ROADMAP.txt` after every update. Fix the file and rerun the validator until it passes.
+7. Update and validate it once more before the final response so it reflects the actual final state.
 
 Never merely print the roadmap in chat. Always write the file.
 
@@ -39,14 +48,15 @@ Apply these rules:
 
 - Keep the summary to one short paragraph at the top.
 - Put important notes immediately after the summary. Start every note with `*` and no space before its text.
-- Include only useful notes. Do not add filler.
-- Put one context-tag line before each related task group.
+- Include at least one important note. If there are no blockers or special constraints, state that explicitly in one note.
+- Put exactly one context-tag line before the task list.
 - Write context tags as adjacent square-bracketed labels: `[Context A][Context B]`.
 - Write each task as `|-[NNN][STATUS] description`.
 - Use three-digit, zero-padded, sequential IDs starting at `001`.
 - Use only the exact statuses `SELESAI`, `PROGRESS`, and `BELUM`.
 - Keep descriptions concise, specific, and outcome-oriented.
 - End the file with a newline.
+- Do not use box-drawing characters, tables, columns, or standalone percentage rows.
 
 ## Status Rules
 
@@ -64,7 +74,7 @@ Do not mark work `SELESAI` merely because code or text was written. Include veri
 - Merge duplicate items instead of creating parallel copies.
 - Preserve still-relevant history, decisions, blockers, and user constraints.
 - Remove or rewrite stale summary and notes so the top section always describes the current state.
-- Add or reorganize context groups when doing so improves readability, but keep task IDs stable.
+- Update the context tags when the work areas change, but keep task IDs stable.
 - Record only meaningful AI work. Omit routine shell reads, tool mechanics, and conversational filler.
 - Reflect user-authored work only when it materially affects the AI's roadmap, and identify it accurately.
 - If blocked, keep the item as `PROGRESS` or `BELUM` as appropriate and explain the blocker in an important note.
@@ -74,6 +84,7 @@ Do not mark work `SELESAI` merely because code or text was written. Include veri
 Before responding to the user, confirm that:
 
 - `ROADMAP.txt` exists at the workspace root.
+- `<skill-directory>/scripts/validate_roadmap.py` exits successfully for the file.
 - The summary matches the latest state.
 - Important notes are current.
 - Context tags and task lines follow the required syntax.
